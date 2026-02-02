@@ -34,7 +34,7 @@ st.divider()
 @st.cache_resource
 def load_artifacts():
     model = tf.keras.models.load_model("Telco_churn_model.keras")
-    selected_features = joblib.load("selected_features.pkl")
+    selected_features = joblib.load("features_names.pkl")
     le = joblib.load("label_encoder.pkl")
     return model, selected_features, le
 
