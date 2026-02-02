@@ -131,14 +131,20 @@ X_input = pd.DataFrame([input_data])[selected_features].values
 st.divider()
 
 if st.button("🔍 Predict Churn"):
-    prob = model.predict(X_input)[0][0]
-    churn_class = int(prob >= 0.5)
+    prob = float(model.predict(X_input)[0][0])  # convert to Python float
+
+    # Classification logic
+    churn_class = 1 if prob >= 0.5 else 0
     churn_label = le.inverse_transform([churn_class])[0]
 
+    # Display results
     st.subheader("📊 Prediction Result")
     st.metric("Churn Probability", f"{prob:.2%}")
     st.write(f"**Predicted Churn:** `{churn_label}`")
-    st.progress(min(prob, 1.0))
+
+    # Progress bar (expects float between 0.0 and 1.0)
+    st.progress(prob)
+
 
 # =====================================================
 # 6️⃣ POWER BI DASHBOARD EMBED
