@@ -12,21 +12,34 @@ import joblib
 # 1️⃣ PAGE CONFIG
 # =====================================================
 st.set_page_config(
-    page_title="Telco Churn Prediction",
+    page_title="Telco Churn Analysis and Prediction",
     page_icon="📊",
     layout="wide"
 )
 
-st.title("📊 Telco Churn Prediction By Using TensorFlow ML")
+st.title("📊 Telco Churn Analysis and Prediction By Using TensorFlow ML")
 st.markdown(
     """
-    Predict customer churn probability using a TensorFlow model trained on Telco customer data.  
-    Enter customer details below to get a prediction.  
     The Power BI dashboard provides exploratory analysis and business insights.
+    Predict customer churn probability using a TensorFlow model trained on Telco customer data.   
     """
 )
 
+# =====================================================
+# 6️⃣ POWER BI DASHBOARD EMBED
+# =====================================================
+
 st.divider()
+
+# Replace this with your actual Power BI embed URL
+POWER_BI_EMBED_URL = "https://app.powerbi.com/view?r=eyJrIjoiMmI1ZTQyMWMtMTIwYi00NDY3LTgzYmQtZjkyOThiY2EzNmI1IiwidCI6ImE2M2JiMWE5LTQ4YzItNDQ4Yi04NjkzLTMzMTdiMDBjYTdmYiIsImMiOjEwfQ%3D%3D"
+
+st.components.v1.iframe(
+    src=POWER_BI_EMBED_URL,
+    width=1200,
+    height=700,
+    scrolling=True
+)
 
 # =====================================================
 # 2️⃣ LOAD MODEL AND ARTIFACTS
@@ -40,7 +53,12 @@ def load_artifacts():
 
 model, selected_features, le = load_artifacts()
 
-st.header("🧾 Customer Information")
+st.header("📈 TensorFlow Customer Churn Prediction")
+st.markdown(
+    """
+    Enter customer details below to get a prediction.
+    """
+)
 
 # =====================================================
 # 3️⃣ BUSINESS-FRIENDLY USER INPUTS
@@ -144,29 +162,6 @@ if st.button("🔍 Predict Churn"):
 
     # Progress bar (expects float between 0.0 and 1.0)
     st.progress(prob)
-
-
-# =====================================================
-# 6️⃣ POWER BI DASHBOARD EMBED
-# =====================================================
-st.divider()
-st.header("📈 Power BI Dashboard")
-
-st.markdown(
-    """
-    The dashboard below provides business insights and customer churn analysis.
-    """
-)
-
-# Replace this with your actual Power BI embed URL
-POWER_BI_EMBED_URL = "https://app.powerbi.com/view?r=eyJrIjoiMmI1ZTQyMWMtMTIwYi00NDY3LTgzYmQtZjkyOThiY2EzNmI1IiwidCI6ImE2M2JiMWE5LTQ4YzItNDQ4Yi04NjkzLTMzMTdiMDBjYTdmYiIsImMiOjEwfQ%3D%3D"
-
-st.components.v1.iframe(
-    src=POWER_BI_EMBED_URL,
-    width=1200,
-    height=700,
-    scrolling=True
-)
 
 # =====================================================
 # 7️⃣ FOOTER
